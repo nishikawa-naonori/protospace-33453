@@ -1,5 +1,6 @@
 class PrototypesController < ApplicationController
-  before_action :authenticate_user!
+  #ログインしていないユーザーはログイン画面に遷移させる
+  before_action :authenticate_user!, except: [:index, :show] 
   before_action :set_prototype, only: [:edit, :destroy]
 
   def index
@@ -20,7 +21,6 @@ class PrototypesController < ApplicationController
   end
 
   def edit
-    
   end
 
   def update
@@ -40,7 +40,6 @@ class PrototypesController < ApplicationController
   end
 
   def destroy
-    @prototype = Prototype.find(params[:id])
     @prototype.destroy
     redirect_to root_path(@prototype.id)
   end
